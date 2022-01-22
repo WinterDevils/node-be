@@ -1,0 +1,26 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "typescript", "html"],
+  "eslint.options": {
+    "extensions": [".js", ".ts", ".html"]
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 250,
+  "files.eol": "\n",
+  "cSpell.words": ["Ovewrite", "cxmobh", "toastr"],
+  "css.validate": false, // Disable css built-in lint
+  "stylelint.enable": true, // Enable sytlelint
+  "scss.validate": false, // Disable scss lint (optional if using scss)
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "css": "css"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
