@@ -30,14 +30,29 @@ router.get('/:id', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  db.Profile.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    address: req.body.address,
-    id: req.body.id,
-  })
-    .then((person) => {
-      res.status(200).send(JSON.stringify(person))
+  db.Profile.create(
+    {
+      mrn: req.body.mrn,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      // dob: req.body.dob,
+      gender: req.body.gender,
+      contactNo: req.body.contactNo,
+      email: req.body.email,
+      isActive: req.body.isActive,
+      addresses: {
+        one: req.body.address.one,
+        two: req.body.address.two,
+        state: req.body.address.state,
+        postcode: req.body.address.postcode,
+      },
+    },
+    {
+      include: [{ association: db.Profile.Addresses, include: [db.Profile.Addresses] }],
+    }
+  )
+    .then((profile) => {
+      res.status(200).send(JSON.stringify(profile))
     })
     .catch((err) => {
       res.status(500).send(JSON.stringify(err))

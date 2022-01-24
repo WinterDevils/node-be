@@ -20,25 +20,46 @@ const Person = sequelize.define('Person', {
 const Profile = sequelize.define(
   'Profile',
   {
-    firstName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    address: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
+    uuid: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+    mrn: { type: Sequelize.STRING },
+    firstName: { type: Sequelize.STRING, allowNull: false },
+    lastName: { type: Sequelize.STRING, allowNull: false },
+    dob: { type: Sequelize.DATE },
+    gender: { type: Sequelize.STRING },
+    contactNo: { type: Sequelize.STRING },
+    email: { type: Sequelize.STRING },
+    isActive: { type: Sequelize.BOOLEAN },
   },
   {
     paranoid: true,
   }
 )
+
+const Address = sequelize.define('Address', {
+  one: { type: Sequelize.STRING, allowNull: false },
+  two: { type: Sequelize.STRING },
+  postcode: { type: Sequelize.INTEGER },
+  state: { type: Sequelize.STRING, allowNull: false },
+  lat: { type: Sequelize.DECIMAL },
+  long: { type: Sequelize.DECIMAL },
+})
+
+// const NextOfKin = sequelize.define('NextOfKin', {
+//   firstName: { type: Sequelize.STRING, allowNull: false },
+//   lastName: { type: Sequelize.STRING, allowNull: false },
+//   contactNo: { type: Sequelize.STRING, allowNull: false },
+//   email: { type: Sequelize.STRING },
+//   relationshop: { type: Sequelize.STRING, allowNull: false },
+// })
+
+// assoociations
+Profile.Addresses = Profile.hasOne(Address)
+Address.Profile = Address.belongsTo(Profile)
+// Profile.hasMany(NextOfKin)
+
 module.exports = {
   sequelize: sequelize,
-  Person: Person,
+  //   Person: Person,
   Profile: Profile,
+  Address: Address,
 }
