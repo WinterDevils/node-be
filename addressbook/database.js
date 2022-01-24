@@ -7,16 +7,7 @@ const sequelize = new Sequelize(process.env.DB_SCHEMA || 'postgres', process.env
     ssl: process.env.DB_SSL == 'true',
   },
 })
-const Person = sequelize.define('Person', {
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: true,
-  },
-})
+
 const Profile = sequelize.define(
   'Profile',
   {
@@ -41,7 +32,7 @@ const Address = sequelize.define('Address', {
   postcode: { type: Sequelize.INTEGER },
   state: { type: Sequelize.STRING, allowNull: false },
   lat: { type: Sequelize.DECIMAL },
-  long: { type: Sequelize.DECIMAL },
+  lng: { type: Sequelize.DECIMAL },
 })
 
 // const NextOfKin = sequelize.define('NextOfKin', {
@@ -59,7 +50,6 @@ Address.Profile = Address.belongsTo(Profile)
 
 module.exports = {
   sequelize: sequelize,
-  //   Person: Person,
   Profile: Profile,
   Address: Address,
 }
