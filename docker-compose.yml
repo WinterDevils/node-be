@@ -14,7 +14,7 @@ services:
   addressbook:
     build:
       context: .
-      dockerfile: Dockerfile.development
+      dockerfile: Dockerfile
     environment:
       DB_SCHEMA: postgres
       DB_USER: postgres
