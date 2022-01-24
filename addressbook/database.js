@@ -20,7 +20,7 @@ const Person = sequelize.define('Person', {
 const Profile = sequelize.define(
   'Profile',
   {
-    uuid: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
+    uuid: { type: Sequelize.UUID, primaryKey: true },
     mrn: { type: Sequelize.STRING },
     firstName: { type: Sequelize.STRING, allowNull: false },
     lastName: { type: Sequelize.STRING, allowNull: false },
