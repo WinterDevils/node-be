@@ -2,7 +2,6 @@ var express = require('express')
 var router = express.Router()
 var moment = require('moment')
 const uuid1 = require('uuid/v1')
-const { Address } = require('../database')
 
 var db = require('../database')
 
@@ -53,6 +52,7 @@ router.post('/', async function (req, res) {
       },
       { transaction: t }
     )
+
     await db.Address.create(
       {
         one: req.body.address.one,
@@ -67,7 +67,7 @@ router.post('/', async function (req, res) {
     )
 
     await t.commit()
-    res.status(200).send(JSON.stringify(`Profile with ID:${uniqudId} has been created`))
+    res.status(200).send(JSON.stringify(`Profile with ID:${uniqueId} has been created`))
   } catch (err) {
     await t.rollback()
     res.status(504).send(JSON.stringify(err))
@@ -100,7 +100,7 @@ router.put('/:id', async function (req, res) {
         postcode: req.body.address.postcode,
         state: req.body.address.state,
         lat: req.body.address.lat,
-        long: req.body.address.long,
+        lng: req.body.address.long,
         ProfileUuid: id,
       },
       { where: { ProfileUuid: id }, transaction: t }
